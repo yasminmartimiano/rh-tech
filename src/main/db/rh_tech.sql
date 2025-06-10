@@ -1,0 +1,22 @@
+CREATE DATABASE rh_tech;
+
+USE rh_tech;
+
+CREATE TABLE funcionarios (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cep VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    numero INTEGER NOT NULL,
+    bairro VARCHAR(255)NOT NULL,
+    cidade VARCHAR(255)NOT NULL,
+    estado VARCHAR(255)NOT NULL
+);
+
+CREATE TABLE cargos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao VARCHAR(500) NOT NULL
+);
