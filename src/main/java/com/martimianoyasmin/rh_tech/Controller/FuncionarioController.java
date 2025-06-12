@@ -1,18 +1,20 @@
 package com.martimianoyasmin.rh_tech.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.martimianoyasmin.rh_tech.Model.FuncionarioModel;
 import com.martimianoyasmin.rh_tech.Service.FuncionarioService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @RestController
 @RequestMapping("/funcionario")
@@ -21,11 +23,10 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService service;
 
-    /*
-● GET → Listar todos e funcionários e cargos
-● DELETE {id} → Remover funcionários e cargos
-● PUT {id} → Atualizar funcionários e cargos
-    */
+    public List<FuncionarioModel> listarTodos(){
+        return service.listarTodos();
+    }
+
     @PostMapping
     public FuncionarioModel salvar(@RequestBody FuncionarioModel funcionarioModel) {
         return service.salvar(funcionarioModel);
@@ -38,5 +39,9 @@ public class FuncionarioController {
                       .orElse(ResponseEntity.notFound().build());
     }
     
-    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        service.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 }
