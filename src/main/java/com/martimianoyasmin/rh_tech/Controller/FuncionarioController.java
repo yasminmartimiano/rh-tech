@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.martimianoyasmin.rh_tech.Model.FuncionarioModel;
 import com.martimianoyasmin.rh_tech.Service.FuncionarioService;
 
+
 @RestController
 @RequestMapping("/funcionario")
 public class FuncionarioController {
@@ -23,13 +24,14 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService service;
 
-    public List<FuncionarioModel> listarTodos(){
-        return service.listarTodos();
+    public List<FuncionarioModel> listarFuncionario(){
+        return service.listarFuncionario();
     }
 
+
     @PostMapping
-    public FuncionarioModel salvar(@RequestBody FuncionarioModel funcionarioModel) {
-        return service.salvar(funcionarioModel);
+    public FuncionarioModel salvarFuncionario(@RequestBody FuncionarioModel funcionarioModel) {
+        return service.salvarFuncionario(funcionarioModel);
     }
     
     @GetMapping("/{id}")

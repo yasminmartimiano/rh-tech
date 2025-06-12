@@ -15,7 +15,7 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository repository;
 
-    public List<FuncionarioModel> listarTodos(){
+    public List<FuncionarioModel> listarFuncionario(){
         return repository.findAll();
     }
 
@@ -23,11 +23,30 @@ public class FuncionarioService {
         return repository.findById(id);
     }
 
-    public FuncionarioModel salvar(FuncionarioModel funcionarioModel){
+    public FuncionarioModel salvarFuncionario(FuncionarioModel funcionarioModel){
         return repository.save(funcionarioModel);
     }
-
+    
     public void deletar(Long id){
         repository.deleteById(id);
+    }
+
+    public FuncionarioModel atualizarFuncionario(Long id, FuncionarioModel funcionarioModel) {
+        Optional<FuncionarioModel> optionalFuncionario = repository.findById(id);
+        if (optionalFuncionario.isPresent()) {
+            FuncionarioModel funcionarioExistente = optionalFuncionario.get();
+            funcionarioExistente.setNome(funcionarioModel.getNome());
+            funcionarioExistente.setEmail(funcionarioModel.getEmail());
+            funcionarioExistente.setSenha(funcionarioModel.getSenha());
+            funcionarioExistente.setCep(funcionarioModel.getCep());
+            funcionarioExistente.setEndereco(funcionarioModel.getEndereco());
+            funcionarioExistente.setNumero(funcionarioModel.getNumero());
+            funcionarioExistente.setBairro(funcionarioModel.getBairro());
+            funcionarioExistente.setCidade(funcionarioModel.getCidade());
+            funcionarioExistente.setEstado(funcionarioModel.getEstado());
+            return repository.save(funcionarioExistente);
+        } else {
+            return null;
+        }
     }
 }
